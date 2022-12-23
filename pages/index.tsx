@@ -9,18 +9,17 @@ import {
   useContractMetadata,
   useUnclaimedNFTSupply,
   Web3Button,
-} from "@thirdweb-dev/react";
-import { BigNumber, utils } from "ethers";
-import type { NextPage } from "next";
-import { useMemo, useState } from "react";
-import styles from "../styles/Theme.module.css";
-import { parseIneligibility } from "../utils/parseIneligibility";
-
-// Put Your NFT Drop Contract address from the dashboard here
-const myNftDropContractAddress = "0x90E2dD8C48cA35534Dd70e3eC19B362cdf71981E";
+} from '@thirdweb-dev/react';
+import { BigNumber, utils } from 'ethers';
+import type { NextPage } from 'next';
+import { useMemo, useState } from 'react';
+import styles from '../styles/Theme.module.css';
+import { parseIneligibility } from '../utils/parseIneligibility';
+import Navbar from '../components/Nav';
+import { contractAddress } from '../utils/contractDetails';
 
 const Home: NextPage = () => {
-  const { contract: nftDrop } = useContract(myNftDropContractAddress);
+  const { contract: nftDrop } = useContract(contractAddress);
 
   const address = useAddress();
   const [quantity, setQuantity] = useState(1);
@@ -31,12 +30,12 @@ const Home: NextPage = () => {
 
   const activeClaimCondition = useActiveClaimConditionForWallet(
     nftDrop,
-    address || ""
+    address || ''
   );
-  const claimerProofs = useClaimerProofs(nftDrop, address || "");
+  const claimerProofs = useClaimerProofs(nftDrop, address || '');
   const claimIneligibilityReasons = useClaimIneligibilityReasons(nftDrop, {
     quantity,
-    walletAddress: address || "",
+    walletAddress: address || '',
   });
   const unclaimedSupply = useUnclaimedNFTSupply(nftDrop);
   const claimedSupply = useClaimedNFTSupply(nftDrop);
@@ -92,7 +91,7 @@ const Home: NextPage = () => {
     const snapshotClaimable = claimerProofs.data?.maxClaimable;
 
     if (snapshotClaimable) {
-      if (snapshotClaimable === "0") {
+      if (snapshotClaimable === '0') {
         // allowed unlimited for the snapshot
         bnMaxClaimable = BigNumber.from(1_000_000);
       } else {
@@ -143,8 +142,6 @@ const Home: NextPage = () => {
     numberTotal,
   ]);
 
-  console.log("claimIneligibilityReasons", claimIneligibilityReasons.data);
-
   const canClaim = useMemo(() => {
     return (
       activeClaimCondition.isSuccess &&
@@ -179,7 +176,7 @@ const Home: NextPage = () => {
   );
   const buttonText = useMemo(() => {
     if (isSoldOut) {
-      return "Sold Out";
+      return 'Sold Out';
     }
 
     if (canClaim) {
@@ -187,7 +184,7 @@ const Home: NextPage = () => {
         activeClaimCondition.data?.currencyMetadata.value || 0
       );
       if (pricePerToken.eq(0)) {
-        return "Mint (Free)";
+        return 'Mint (Free)';
       }
       return `Mint (${priceToMint})`;
     }
@@ -195,10 +192,10 @@ const Home: NextPage = () => {
       return parseIneligibility(claimIneligibilityReasons.data, quantity);
     }
     if (buttonLoading) {
-      return "Checking eligibility...";
+      return 'Checking eligibility...';
     }
 
-    return "Claiming not available";
+    return 'Claiming not available';
   }, [
     isSoldOut,
     canClaim,
@@ -211,6 +208,7 @@ const Home: NextPage = () => {
 
   return (
     <div className={styles.container}>
+      <Navbar />
       <div className={styles.mintInfoContainer}>
         {isLoading ? (
           <p>Loading...</p>
@@ -242,7 +240,7 @@ const Home: NextPage = () => {
                   {claimedSupply && unclaimedSupply ? (
                     <p>
                       <b>{numberClaimed}</b>
-                      {" / "}
+                      {' / '}
                       {numberTotal}
                     </p>
                   ) : (
@@ -254,7 +252,7 @@ const Home: NextPage = () => {
 
               {claimConditions.data?.length === 0 ||
               claimConditions.data?.every(
-                (cc) => cc.maxClaimableSupply === "0"
+                (cc) => cc.maxClaimableSupply === '0'
               ) ? (
                 <div>
                   <h2>
@@ -292,19 +290,19 @@ const Home: NextPage = () => {
                       </div>
                     ) : (
                       <Web3Button
-                        contractAddress={nftDrop?.getAddress() || ""}
+                        contractAddress={nftDrop?.getAddress() || ''}
                         action={(cntr) => cntr.erc721.claim(quantity)}
                         isDisabled={!canClaim || buttonLoading}
                         onError={(err) => {
                           console.error(err);
-                          alert("Error claiming NFTs");
+                          alert('Error claiming NFTs');
                         }}
                         onSuccess={() => {
                           setQuantity(1);
-                          alert("Successfully claimed NFTs");
+                          alert('Successfully claimed NFTs');
                         }}
                       >
-                        {buttonLoading ? "Loading..." : buttonText}
+                        {buttonLoading ? 'Loading...' : buttonText}
                       </Web3Button>
                     )}
                   </div>
@@ -314,13 +312,13 @@ const Home: NextPage = () => {
           </>
         )}
       </div>
-      {/* Powered by thirdweb */}{" "}
       <img
-        src="/logo.png"
-        alt="thirdweb Logo"
+        src='/logo.png'
+        alt='thirdweb Logo'
         width={135}
         className={styles.buttonGapTop}
       />
+      <span>Ethpass</span>
     </div>
   );
 };

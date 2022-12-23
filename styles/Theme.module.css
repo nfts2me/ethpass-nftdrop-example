@@ -1,5 +1,5 @@
 .container {
-  margin-top: 96px;
+  margin-top: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,7 +48,7 @@
 }
 
 .image {
-  width: 85%;
+  width: 1rem;
   border-radius: 16px;
 }
 
@@ -168,6 +168,35 @@
 
 .quantityControlButton:disabled {
   opacity: 0.25;
+}
+
+/*Navbar*/
+.navbar {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 95vw;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 1rem;
+}
+
+.navbar_item {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.navbar_item:hover {
+  color: #a1a1a5;
+}
+
+.navbar_connect_button {
+  margin-left: auto;
+}
+
+.dashboard_nfts {
+  display: flex;
+  gap: 1rem;
 }
 
 /* On mobile, make the .mintInfoContainer stack vertically */
