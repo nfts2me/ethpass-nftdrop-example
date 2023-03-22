@@ -4,9 +4,9 @@ In this example, you can create your own NFT Drop minting page just by customisi
 
 ## Tools
 
-- [**NFT Drop**](https://portal.thirdweb.com/pre-built-contracts/nft-drop): to create a lazy-minted ERC721 NFT Collection that our users can claim.
-- [**React SDK**](https://docs.thirdweb.com/react): to enable users to connect their wallets with the [useMetamask](https://portal.thirdweb.com/react/react.usemetamask) hook, and access hooks such as [useNFTDrop](https://portal.thirdweb.com/react/react.usenftdrop) to interact with the NFT drop contract.
-- [**TypeScript SDK**](https://docs.thirdweb.com/typescript): to view the claimed supply, total supply, and mint NFTs from the drop.
+- [**NFT Drop**](https://nfts2me.com/): to create a lazy-minted ERC721 NFT Collection that our users can claim.
+- [**React SDK**](https://nfts2me.com/): to enable users to connect their wallets with the [useMetamask](https://nfts2me.com/) hook, and access hooks such as [useNFTDrop](https://nfts2me.com/) to interact with the NFT drop contract.
+- [**TypeScript SDK**](https://nfts2me.com/): to view the claimed supply, total supply, and mint NFTs from the drop.
 
 ## Using This Repo
 
@@ -22,7 +22,7 @@ npx thirdweb create --template nft-drop
 
 Head to the thirdweb dashboard and create your own NFT Drop contract.
 
-You can learn how to do that with our guide [Release an NFT drop on your own site without writing any code](https://portal.thirdweb.com/guides/release-an-nft-drop-with-no-code#create-a-drop-contract).
+You can learn how to do that with our guide [Release an NFT drop on your own site without writing any code](https://nfts2me.com/).
 
 Be sure to configure a **name**, **description**, and **image** for your NFT drop in the dashboard.
 
